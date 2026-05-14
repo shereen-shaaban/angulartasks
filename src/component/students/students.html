@@ -1,0 +1,26 @@
+
+<h1 class="alert alert-warning w-50 mx-auto my-4 text-center">Students</h1>
+<table class="table table-bordered w-50 mx-auto table-striped border-dark">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- <p>{{studentsData}}</p> -->
+
+
+    @for (std of studentsdata; track $index) {
+      <tr>
+        <td>{{std.name}}</td>
+
+        @if (+std.age <= 25) {
+          <td>{{std.age}}</td>
+        }
+      </tr>
+    }
+
+  </tbody>
+</table>

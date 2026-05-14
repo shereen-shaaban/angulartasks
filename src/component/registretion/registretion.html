@@ -1,0 +1,40 @@
+<h1 class="alert alert-warning w-50 mx-auto my-4 text-center">Registeration</h1>
+
+<div class="form w-50 mx-auto my-2 border border-2 border-dark rounded-2 p-4">
+  <div class="input-group my-3 w-75 mx-auto">
+    <label class="input-group-text bg-warning-subtle fw-medium">Name</label>
+    <input class="form-control" type="text" [(ngModel)]="stdName">
+  </div>
+
+  @if(NameNotValid){
+      <div>
+        <p class="text-danger ms-5">name should be more than 3 characters </p>
+      </div>
+  }
+  @else if(stdName.length >= 3){
+      <div>
+        <p class="text-success ms-5">name is valid </p>
+      </div>
+  }
+  <div class="input-group my-3 w-75 mx-auto">
+    <label class="input-group-text bg-warning-subtle fw-medium">Age</label>
+    <input class="form-control" type="text" [(ngModel)]="stdAge">
+  </div>
+
+    <div *ngIf="AgeNotValid;then thenBlock; else elseBlock"></div>
+
+    <ng-template #thenBlock>
+      <div>
+        <p class="text-danger ms-5">Age Not Valid</p>
+      </div>
+    </ng-template>
+
+    <ng-template #elseBlock>
+      <div>
+        <p *ngIf="stdAge" class="text-success ms-5">Age Valid</p>
+      </div>
+    </ng-template>
+  <div class="w-25 mx-auto text-center mt-3">
+    <input type="button" class="btn btn-warning" value="Add" (click)="addstudents()" >
+  </div>
+</div>

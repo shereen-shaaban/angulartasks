@@ -1,0 +1,31 @@
+
+<h1 class="alert alert-warning w-25 mx-auto my-4 text-center">add post</h1>
+
+<div class="form w-50 mx-auto my-2 border border-2 border-dark rounded-2 p-4">
+  <div class="input-group my-3 w-75 mx-auto">
+    <label class="input-group-text bg-warning-subtle fw-medium">title</label>
+    <input class="form-control" type="text" [(ngModel)]="title">
+  </div>
+    @if(title.length>10){
+     <div class="alert alert-success w-75 mx-auto text-center">
+      <p> length of title should be more than 10 characters</p>
+     </div>
+  }
+  <div class="input-group my-3 w-75 mx-auto">
+    <label class="input-group-text bg-warning-subtle fw-medium">Post</label>
+    <input class="form-control" type="text" [(ngModel)]="post">
+  </div>
+  
+  @if(post.length>20){
+     <div class="alert  w-75 mx-auto text-center">
+        <p>
+            length of post should be more than 20 characters 
+        </p>
+       
+     </div>
+  }
+ <!-- <input type="file" class="form-control w-10 mx-auto"> -->
+  <div class="w-25 mx-auto text-center mt-3">
+    <input type="button" class="btn btn-warning" value="Add" (click)="addpost()" >
+  </div>
+</div>
