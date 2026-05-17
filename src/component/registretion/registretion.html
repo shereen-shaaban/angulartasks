@@ -6,11 +6,16 @@
     <input class="form-control" type="text"  formControlName="name">
   </div>
 
-  @if(nameexist){
+ @if(namenotexist){
       <div>
-        <p class="text-danger ms-5">name should be more than 3 characters </p>
+        <p class="text-danger ms-5">name is required</p>
       </div>
-  } 
+  }  
+  @else if(namepattern){
+      <div>
+        <p class="text-danger ms-5">name must start with character </p>
+      </div>
+  }
   @else if(nameminlength){
       <div>
         <p class="text-danger ms-5">name should be more than 3 characters </p>
@@ -18,10 +23,12 @@
   }
   @else if(namemaxlength){
       <div>
-        <p class="text-success ms-5">name exceed </p>
+        <p class="text-danger ms-5">name exceed  50 charactrer</p>
       </div>
   }
-  @else{
+   
+
+  @else if(myform.controls.name.touched){
      <div>
         <p class="text-success ms-5">name valid </p>
       </div>
@@ -30,17 +37,24 @@
     <label class="input-group-text bg-warning-subtle fw-medium">Age</label>
     <input class="form-control" type="text"  formControlName="age">
   </div>
-@if(minage){
+ @if(minage){
       <div>
         <p class="text-danger ms-5">age should be more than 1 </p>
       </div>
-    }
+    } 
+    
     @else if(maxage){
       <div>
         <p class="text-danger ms-5">age should be less than 20 </p>
       </div>
     }
-    @else{
+       @else if(agepattern){
+      <div>
+        <p class="text-danger ms-5">age must be anumber </p>
+      </div>
+    }
+   
+    @else if(myform.controls.age.touched){
       <div>
         <p class="text-success ms-5">age valid </p>
       </div>
