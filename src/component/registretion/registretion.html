@@ -1,40 +1,52 @@
 <h1 class="alert alert-warning w-50 mx-auto my-4 text-center">Registeration</h1>
 
-<div class="form w-50 mx-auto my-2 border border-2 border-dark rounded-2 p-4">
+<form   [formGroup]="myform"  class="form w-50 mx-auto my-2 border border-2 border-dark rounded-2 p-4">
   <div class="input-group my-3 w-75 mx-auto">
     <label class="input-group-text bg-warning-subtle fw-medium">Name</label>
-    <input class="form-control" type="text"  #refName>
+    <input class="form-control" type="text"  formControlName="name">
   </div>
 
-  <!-- @if(NameNotValid){
+  @if(nameexist){
+      <div>
+        <p class="text-danger ms-5">name should be more than 3 characters </p>
+      </div>
+  } 
+  @else if(nameminlength){
       <div>
         <p class="text-danger ms-5">name should be more than 3 characters </p>
       </div>
   }
-  @else if(refName.length >= 3){
+  @else if(namemaxlength){
       <div>
-        <p class="text-success ms-5">name is valid </p>
+        <p class="text-success ms-5">name exceed </p>
       </div>
-  } -->
+  }
+  @else{
+     <div>
+        <p class="text-success ms-5">name valid </p>
+      </div>
+  } 
   <div class="input-group my-3 w-75 mx-auto">
     <label class="input-group-text bg-warning-subtle fw-medium">Age</label>
-    <input class="form-control" type="text"  #refAge>
+    <input class="form-control" type="text"  formControlName="age">
   </div>
-
-    <!-- <div *ngIf="AgeNotValid;then thenBlock; else elseBlock"></div>
-
-    <ng-template #thenBlock>
+@if(minage){
       <div>
-        <p class="text-danger ms-5">Age Not Valid</p>
+        <p class="text-danger ms-5">age should be more than 1 </p>
       </div>
-    </ng-template>
-
-    <ng-template #elseBlock>
+    }
+    @else if(maxage){
       <div>
-        <p *ngIf="refAge" class="text-success ms-5">Age Valid</p>
+        <p class="text-danger ms-5">age should be less than 20 </p>
       </div>
-    </ng-template> -->
+    }
+    @else{
+      <div>
+        <p class="text-success ms-5">age valid </p>
+      </div>
+    }
+   
   <div class="w-25 mx-auto text-center mt-3">
-    <input type="button" class="btn btn-warning" value="Add"   (click)=" addstudents2(refName.value,refAge.value)">
+    <input type="button" class="btn btn-warning" value="Add"   (click)=" addstudents2()">
   </div>
-</div>
+</form>

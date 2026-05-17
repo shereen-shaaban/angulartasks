@@ -1,50 +1,52 @@
 import { Component, Output,EventEmitter } from '@angular/core';
 import {  CommonModule} from '@angular/common'
 import { isNgTemplate } from '@angular/compiler';
-import {FormsModule} from '@angular/forms'
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
 @Component({
   selector: 'app-registretion',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './registretion.html',
   styles: ``,
 })
 export class Registretion {
+ myform=new FormGroup({
+    name:new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
+    age:new FormControl(null,[Validators.min(1),Validators.max(20)])
+})
 
-  // stdName:string = "";
-  // stdAge:string = "";
-//   get AgeNotValid(){
-//     return +this.refAge > 25 || this.stdAge == '0' || +this.stdAge < 0 || Number.isNaN(+this.stdAge)
-//   }
-// get NameNotValid(){
-//   return this.stdName.length <3&& this .stdName!=""
-// }
-  @Output() anyevent = new EventEmitter()
-
-
-//   addstudents()
-//   {
-//    if(!this.AgeNotValid && !this.NameNotValid){
-//       let stdObj = {name:this.stdName, age:this.stdAge}
-//       this.anyevent.emit(stdObj)
-//       this.stdName = ''
-//       this.stdAge = ''
-//     }
-
-// }
-
-addstudents2(name:string,age:string)
+@Output() anyevent = new EventEmitter()
+get minage()
 {
-  //  if(!this.AgeNotValid && !this.NameNotValid){
-      let stdObj = {name:name, age:age}
-      this.anyevent.emit(stdObj)
-      // console.log(name,age)
-     name = ''
-     age = ''
-    // }
-
-
+  return this.myform.controls.age.errors?.['min']
+}
+get maxage()
+{
+  return this.myform.controls.age.errors?.['max']
+}
+get nameexist()
+{
+  return this .myform.controls.name.errors?.['required']&& this.myform.controls.name.value !==null
+}
+get nameminlength()
+{
+  return this.myform.controls.name.errors?.['minlength']?.requiredLength&& this.myform.controls.name.value!==null 
+ 
+}
+get namemaxlength()
+{
+  return this.myform.controls.name.errors?.['maxlength'].requiredLength&& this.myform.controls.name.value!==null
+ 
 }
 
-
+addstudents2()
+{
+  if(this.myform.valid)
+{
+this.anyevent.emit(this.myform.value)
+console.log(this.myform.controls.name.errors?.['required'])
+console.log(this.myform.controls.name.errors?.['minlength'])
+this.myform.reset()
+}
+}
 
 }
